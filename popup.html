@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Remember Me</title>
+
+    <link
+        rel="stylesheet"
+        href="popup.css"
+    >
+</head>
+
+<body>
+
+<div class="popup">
+
+    <header class="popup-header">
+        <div class="logo">
+            remember me
+        </div>
+    </header>
+
+    <main>
+
+        <section class="capture-card">
+
+            <div class="capture-label">
+                CURRENT PAGE
+            </div>
+
+            <div
+                class="page-title"
+                id="pageTitle"
+            >
+                Loading...
+            </div>
+
+            <div
+                class="page-url"
+                id="pageUrl"
+            >
+            </div>
+
+            <label>
+                Save to
+            </label>
+
+            <select id="listSelect"></select>
+
+            <button
+                class="primary-button"
+                id="savePage"
+            >
+                Save this page
+            </button>
+
+        </section>
+
+
+        <section
+            class="capture-card"
+            id="selectionCard"
+            hidden
+        >
+
+            <div class="capture-label">
+                SELECTED TEXT
+            </div>
+
+            <div
+                class="selection"
+                id="selectionText"
+            >
+            </div>
+
+            <label>
+                Save to
+            </label>
+
+            <select
+                id="selectionListSelect"
+            ></select>
+
+            <button
+                class="primary-button"
+                id="saveSelection"
+            >
+                Save selection
+            </button>
+
+        </section>
+
+
+        <button
+            class="secondary-button"
+            id="openDashboard"
+        >
+            Open Remember Me
+        </button>
+
+    </main>
+
+</div>
+
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+
+</body>
+</html>
