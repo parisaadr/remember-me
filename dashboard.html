@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Remember Me</title>
+
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                remember me
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-section-title">
+                    My lists
+                </div>
+
+                <div id="listsContainer"></div>
+
+                <button
+                    class="new-list-button"
+                    id="newListButton"
+                >
+                    + New list
+                </button>
+
+            </div>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="eyebrow">
+                    REMEMBER ME
+                </div>
+
+                <h1 id="currentListTitle">
+                    All items
+                </h1>
+
+            </div>
+
+            <button
+                class="add-button"
+                id="addButton"
+            >
+                + Add
+            </button>
+
+        </header>
+
+
+        <section class="toolbar">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search..."
+            >
+
+            <select id="sortSelect">
+
+                <option value="newest">
+                    Newest
+                </option>
+
+                <option value="oldest">
+                    Oldest
+                </option>
+
+                <option value="az">
+                    A–Z
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <div
+            class="item-count"
+            id="itemCount"
+        >
+            0 items
+        </div>
+
+
+        <section
+            id="itemsList"
+            class="items-list"
+        >
+        </section>
+
+
+        <section
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <div class="empty-title">
+                Nothing here yet
+            </div>
+
+            <div class="empty-text">
+                Save something from your browser
+                or add something manually.
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div
+    class="modal"
+    id="addModal"
+    hidden
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2>
+                Add something
+            </h2>
+
+            <button
+                class="close-button"
+                id="closeAddModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="type-grid">
+
+            <button
+                class="type-button"
+                data-type="note"
+            >
+                <strong>Note</strong>
+                <span>Write something down</span>
+            </button>
+
+            <button
+                class="type-button"
+                data-type="checklist"
+            >
+                <strong>Checklist</strong>
+                <span>Keep track of tasks</span>
+            </button>
+
+            <button
+                class="type-button"
+                data-type="link"
+            >
+                <strong>Link</strong>
+                <span>Save a website</span>
+            </button>
+
+            <button
+                class="type-button"
+                data-type="quote"
+            >
+                <strong>Quote</strong>
+                <span>Save a quote</span>
+            </button>
+
+            <button
+                class="type-button"
+                data-type="text"
+            >
+                <strong>Text</strong>
+                <span>Save plain text</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="modal"
+    id="editorModal"
+    hidden
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2 id="editorTitle">
+                Add item
+            </h2>
+
+            <button
+                class="close-button"
+                id="closeEditor"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="editorForm">
+
+            <input
+                type="hidden"
+                id="itemType"
+            >
+
+            <label>
+                Title
+            </label>
+
+            <input
+                id="itemTitle"
+                type="text"
+            >
+
+
+            <div id="contentField">
+
+                <label>
+                    Content
+                </label>
+
+                <textarea
+                    id="itemContent"
+                    rows="8"
+                ></textarea>
+
+            </div>
+
+
+            <div
+                id="urlField"
+                hidden
+            >
+
+                <label>
+                    URL
+                </label>
+
+                <input
+                    id="itemUrl"
+                    type="url"
+                >
+
+            </div>
+
+
+            <div
+                id="authorField"
+                hidden
+            >
+
+                <label>
+                    Author
+                </label>
+
+                <input
+                    id="itemAuthor"
+                    type="text"
+                >
+
+            </div>
+
+
+            <div
+                id="checklistField"
+                hidden
+            >
+
+                <label>
+                    Checklist
+                </label>
+
+                <div id="checklistItems"></div>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="addChecklistItem"
+                >
+                    + Add item
+                </button>
+
+            </div>
+
+
+            <label>
+                List
+            </label>
+
+            <select id="editorList"></select>
+
+
+            <button
+                class="primary-button"
+                type="submit"
+            >
+                Save
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div
+    class="modal"
+    id="listModal"
+    hidden
+>
+
+    <div class="modal-card small">
+
+        <div class="modal-header">
+
+            <h2>
+                New list
+            </h2>
+
+            <button
+                class="close-button"
+                id="closeListModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="listForm">
+
+            <label>
+                List name
+            </label>
+
+            <input
+                id="listName"
+                type="text"
+                placeholder="e.g. Gift ideas"
+                required
+            >
+
+            <button
+                class="primary-button"
+                type="submit"
+            >
+                Create list
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="storage.js"></script>
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>
